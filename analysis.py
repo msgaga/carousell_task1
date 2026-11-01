@@ -111,8 +111,8 @@ def bag_price_by_condition(df: pd.DataFrame, brand: str) -> pd.DataFrame:
     return table.reindex(CONDITION_ORDER).dropna(how="all")
 
 
-# 15. Speed of sale by condition: median months in stock and % marked down (supports takeaway #4)
-def condition_speed(df: pd.DataFrame) -> pd.DataFrame:
+# 15. Stock age by condition: median months unsold items have been in stock, and % marked down (supports takeaway #4)
+def stock_age_by_condition(df: pd.DataFrame) -> pd.DataFrame:
     data = df.assign(marked_down=df["compare_at_price"].notna())
     table = data.groupby(["site", "condition"]).agg(listings=("price_sgd", "size"),
                                                     median_months_in_stock=("months_in_stock", "median"),
@@ -140,7 +140,7 @@ def run_analysis():
         "8_contemporary_brands":       contemporary_listings(df),
         "9a_chanel_bags_by_condition": bag_price_by_condition(df, "Chanel"),
         "9b_hermes_bags_by_condition": bag_price_by_condition(df, "Hermès"),
-        "9c_condition_speed":          condition_speed(df),
+        "9c_stock_age_by_condition":   stock_age_by_condition(df),
     }
 
     OUTPUT_DIR.mkdir(exist_ok=True)

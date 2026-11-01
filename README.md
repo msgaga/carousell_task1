@@ -26,13 +26,13 @@ python analysis.py
 
 `clean.py` recreates the clean files in `data/`, and `analysis.py` writes the answer-key tables to `output/`.
 
-- `python spot_check.py` compares 10 random items per site with the live product pages. Items sold since the snapshot will show as no longer live.
+- `python spot_check.py` compares 10 random items per site with the live product pages. It overwrites `data/spot_check.csv`, which holds the original check from the snapshot day (20/20 passed); items sold since then will show as no longer live.
 - `python scrape.py` takes a new snapshot of the live sites. It overwrites `data/raw_*.csv`, so the numbers will differ from the dashboard.
 
 ## Folder structure
 
 ```
 scrape.py, clean.py, spot_check.py, analysis.py   the pipeline (run in this order)
-data/      raw snapshot from 29 Oct 2026; clean files are created here by clean.py
+data/      raw snapshot and spot-check results from 29 Oct 2026; clean files are created here by clean.py
 output/    analysis tables, created by analysis.py
 ```
